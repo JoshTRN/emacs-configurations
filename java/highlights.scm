@@ -3,7 +3,7 @@
 (scoped_identifier (identifier) @type (.match?  @type "^[A-Z]") )
 (scoped_identifier (identifier) @constant)
 
-(variable_declarator (identifier) @variable)
+(variable_declarator (identifier) @constant)
 
 (formal_parameter (identifier) @variable.parameter)
 (method_declaration
@@ -108,4 +108,5 @@
 "with" @keyword
 "=" @operator
 
-(((method_invocation) @type) . (.match? @type "[A-Z]"))
+(method_invocation ( argument_list ( identifier ) @constant))
+(((method_invocation) @type) . (.match? @type "^[A-Z]"))
