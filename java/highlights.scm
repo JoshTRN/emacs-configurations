@@ -6,8 +6,7 @@
 (variable_declarator (identifier) @constant)
 
 (formal_parameter (identifier) @variable.parameter)
-(method_declaration
-  name: (identifier) @function.method)
+(method_declaration name: (identifier) @function.method)
 (method_invocation name: (identifier) @function.call)
 (super) @function.builtin
 
@@ -108,5 +107,14 @@
 "with" @keyword
 "=" @operator
 
+[
+ "("
+ ")"
+ "{"
+ "}"
+ "["
+ "]"
+ ] @punctuation.bracket
+
 (method_invocation ( argument_list ( identifier ) @constant))
-(((method_invocation) @type) . (.match? @type "^[A-Z]"))
+(((method_invocation (identifier) @type)) . (.match? @type "^[A-Z]"))
