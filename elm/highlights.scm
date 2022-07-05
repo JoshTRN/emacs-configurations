@@ -6,9 +6,9 @@
     "let"
     "in"
  ] @keyword
+
 (case) @keyword
 (of) @keyword
-
 (colon) @keyword
 (backslash) @keyword
 (as) @keyword
@@ -16,48 +16,19 @@
 (exposing) @keyword
 (alias) @keyword
 (infix) @keyword
-
 (arrow) @keyword
-
 (port) @keyword
 
-;; case_of_branch:
-;; pattern:
-;; union_pattern:
-;; upper_case_qid:
-;; upper_case_identifier:
+;; case of
 (case_of_branch (pattern (union_pattern (upper_case_qid) @constructor)))
 
-;; function_call_expr:
-;; value_expr:
-;; value_qid:
-;; upper_case_identifier:
-;; value_expr:
-;; value_qid:
-;; upper_case_identifier:
-;; dot:
-;; lower_case_identifier:
 (function_call_expr (value_expr (value_qid (upper_case_identifier) @type)))
-
-
-;; function_call_expr:
-;; value_expr:
-;; upper_case_qid:
-;; upper_case_identifier:
-
 (function_call_expr (value_expr (upper_case_qid (upper_case_identifier) @constructor)))
 
-;; record_type:
-;; field_type:
-;; lower_case_identifier:
+;; Records
 (record_type (field_type (lower_case_identifier) @constant))
+(record_base_identifier (lower_case_identifier) @variable)
 
-;; field_access_expr:
-;; value_expr:
-;; value_qid:
-;; lower_case_identifier:
-;; dot:
-;; lower_case_identifier:
 (field_access_expr (lower_case_identifier) @constant)
 (field_access_expr (value_expr (value_qid (lower_case_identifier) @variable)))
 (type_alias_declaration (upper_case_identifier) @type)
@@ -94,8 +65,6 @@
 (module) @keyword
 
 (number_constant_expr) @constant
-
-
 
 ;; (type_declaration(upper_case_identifier) @storage.type.elm)
 ;; (type_alias_declaration name: (upper_case_identifier) @storage.type.elm)
