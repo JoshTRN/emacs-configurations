@@ -136,7 +136,7 @@
  '(tree-sitter-hl-face:keyword ((t (:foreground "#E91E63"))))
  '(tree-sitter-hl-face:label ((default (:inherit (font-lock-preprocessor-face)))))
  '(tree-sitter-hl-face:property ((t (:inherit font-lock-constant-face :foreground "#607D8B" :slant italic))))
- '(tree-sitter-hl-face:property.definition ((default (:inherit (tree-sitter-hl-face:variable.parameter)))))
+ '(tree-sitter-hl-face:property.definition ((default (:inherit (tree-sitter-hl-face:property)))))
  '(tree-sitter-hl-face:punctuation.bracket ((t (:inherit rainbow-delimiters-depth-1-face))))
  '(tree-sitter-hl-face:string ((t (:inherit font-lock-string-face))))
  '(tree-sitter-hl-face:string.special ((t (:inherit tree-sitter-hl-face:string :weight bold))))
