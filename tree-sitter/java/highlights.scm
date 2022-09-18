@@ -1,13 +1,17 @@
 ; Methods
 
-(scoped_identifier (identifier) @type (.match?  @type "^[A-Z]") )
-(scoped_identifier (identifier) @constant)
+(package_declaration (scoped_identifier (identifier) @constant))
 
-(variable_declarator (identifier) @constant)
+((identifier) @constant (.match? @constant "^[A-Z_][A-Z_\\d]*$"))
+(scoped_identifier (identifier) @type (.match?  @type "^[A-Z]") )
+(scoped_identifier (scoped_identifier) @constant)
+(scoped_identifier (identifier) @property)
+
+(field_access ( identifier ) @type (.match?  @type "^[A-Z]"))
+(field_access ( identifier ) @property)
 
 (formal_parameter (identifier) @variable.parameter)
 (method_declaration name: (identifier) @function.method)
-(method_invocation name: (identifier) @function.call)
 (super) @function.builtin
 
 ; Annotations
@@ -29,6 +33,7 @@
 (constructor_declaration (identifier) @constructor)
 
 (type_identifier) @type
+(variable_declarator (identifier) @constant)
 (boolean_type) @type.builtin
 (integral_type) @type.builtin
 (floating_point_type) @type.builtin
@@ -36,8 +41,6 @@
 
 ; Variables
 
-((identifier) @constant
- (.match? @constant "^[A-Z_][A-Z_\\d]*$"))
 
 (this) @variable.builtin
 
@@ -106,6 +109,13 @@
 "while" @keyword
 "with" @keyword
 "=" @operator
+"==" @operator
+"!" @operator
+"->" @operator
+"?" @operator
+":" @operator
+"::" @operator
+"&&" @operator
 
 [
  "("
@@ -116,5 +126,10 @@
  "]"
  ] @punctuation.bracket
 
-(method_invocation ( argument_list ( identifier ) @constant))
+(lambda_expression (identifier) @variable.parameter)
 (((method_invocation (identifier) @type)) . (.match? @type "^[A-Z]"))
+(method_invocation ( argument_list ( identifier ) @constant))
+
+(method_invocation name: (identifier) @function.call)
+
+((identifier) @constant (.match? @constant "^[A-Z_][A-Z_\\d]*$"))
