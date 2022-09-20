@@ -57,7 +57,8 @@
 (false) @constant
 (null_literal) @constant.builtin
 
-(comment) @comment
+(line_comment) @comment
+(block_comment) @comment
 
 ; Keywords
 
