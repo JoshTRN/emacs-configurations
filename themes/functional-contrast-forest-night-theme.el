@@ -158,10 +158,6 @@
  '(web-mode-html-attr-name-face ((t (:foreground "#00d364"))))
  '(web-mode-html-tag-face ((t (:foreground "deep sky blue"))))
  '(widget-field ((t (:extend t :background "#000e0a"))))
-
-
-
-
  '(default ((t (:inherit nil :extend nil :stipple nil :background "#011f18" :foreground "#26A69A" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "CTDB" :family "Fira Code")))))
 
 (provide-theme 'functional-contrast-forest-night)
