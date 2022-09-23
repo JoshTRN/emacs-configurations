@@ -17,6 +17,10 @@
                          go
                          (go :variables go-backend 'lsp)
                          tree-sitter
+                         (tree-sitter :variables
+                                      tree-sitter-syntax-highlight-enable t
+                                      tree-sitter-fold-enable t
+                                      tree-sitter-fold-indicators-enable t)
                          html
                          haskell
                          helm
