@@ -65,7 +65,6 @@
 (add-hook 'haskell-mode-hook 'pretty-lambdas-haskell)
 (add-hook 'elm-mode-hook 'pretty-lambdas-haskell)
 (add-hook 'go-mode-hook #'lsp-deferred)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;; magit
 (defun disable-y-or-n-p (orig-fun &rest args)
@@ -81,6 +80,7 @@
 ;; background settings
 (set-frame-parameter (selected-frame) 'alpha-background 75)
 (add-to-list 'default-frame-alist '(alpha-background . 75))
+(add-to-list 'custom-theme-load-path "~/code/emacs-configurations/themes")
 
 (defun my-setup-indent (n)
   (setq javascript-indent-level n)
