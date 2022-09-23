@@ -48,7 +48,7 @@
  '(haskell-constructor-face ((t (:inherit font-lock-type-face :foreground "purple2"))))
  '(haskell-operator-face ((t (:inherit font-lock-variable-name-face :foreground "#F92672"))))
  '(haskell-type-face ((t (:inherit font-lock-type-face))))
- '(header-line ((t (:box (:line-width 1 :color "#64645E" :style unspecified) :foreground "#F8F8F0" :inherit powerline-active1))))
+ '(header-line ((t (:box (:line-width 1 :color "#64645E" :style unspecified) :foreground "#F8F8F0" :inherit powerline-active1 :background "#001a14"))))
  '(helm-buffer-directory ((t (:inherit helm-ff-directory :extend t))))
  '(helm-buffer-file ((t (:inherit font-lock-builtin-face :extend t))))
  '(helm-ff-directory ((t (:extend t :foreground "deep sky blue"))))
