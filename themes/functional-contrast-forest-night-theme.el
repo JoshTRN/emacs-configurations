@@ -4,7 +4,7 @@
 (custom-theme-set-faces
  'functional-contrast-forest-night
  '(border ((t (:background "#011f18"))))
- '(button ((t (:inherit link :underline t))))
+ '(button ((t (:underline t :inherit font-lock-type-face))))
  '(company-web-doc-attribute-face ((t (:inherit font-lock-type-face))))
  '(cursor ((t (:background "dark red" :foreground "#272822" :inverse-video t))))
  '(custom-button ((t (:box (:line-width (1 . 1) :color "default" :style released-button) :foreground "default" :background "#001a14"))))
@@ -88,8 +88,8 @@
  '(magit-diff-hunk-heading-highlight ((t (:inherit mode-line :extend t))))
  '(magit-diff-removed ((t (:extend t :background "#3d0f0f" :foreground "firebrick4"))))
  '(magit-diff-removed-highlight ((t (:extend t :background "#553333" :foreground "firebrick3" :weight semi-bold))))
- '(magit-diff-revision-summary ((t (:background "#02382d" :extend t :inherit mode-line-inactive))))
- '(magit-diff-revision-summary-highlight ((t (:inherit (magit-diff-hunk-heading-highlight)))))
+ '(magit-diff-revision-summary ((t (:foreground "#00BFFF" :height 1.35))))
+ '(magit-diff-revision-summary-highlight ((t (:background "#02382d" :foreground "#00BFFF"))))
  '(magit-diffstat-added ((t (:foreground "dark green"))))
  '(magit-diffstat-removed ((t (:foreground "dark red"))))
  '(magit-filename ((t (:foreground "chocolate2" :weight normal))))
