@@ -33,6 +33,14 @@
                          multiple-cursors
                          nixos
                          org
+                         (org :variables
+                              org-enable-verb-support t
+                              org-enable-transclusion-support t
+                              org-enable-appear-support t
+                              org-enable-valign t
+                              org-enable-epub-support t
+                              org-enable-roam-protocol t
+                              org-enable-roam-support t)
                          prettier
                          search-engine
                          shell-scripts

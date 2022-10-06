@@ -1,18 +1,20 @@
-(add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+(setq treemacs-position 'right
+      treemacs-width 50
+      lsp-ui-doc-enable nil
+      lsp-ui-doc-position 'at-point
+      tree-sitter-hl-use-font-lock-keywords nil
+      evil-emacs-state-cursor '("SeaGreen4" box)
+      git-gutter-fr:side 'left-fringe
+      evil-normal-state-cursor '("SeaGreen4" box)
+      jit-lock-chunk-size 5000
+      org-ellipsis " ▾"
+      evil-visual-state-cursor '("cyan" box)
+      evil-replace-state-cursor '("red" bar)
+      evil-operator-state-cursor '("red" hollow))
 
-(setq
- treemacs-position 'right
- lsp-ui-doc-enable nil
- lsp-ui-doc-position 'at-point
- tree-sitter-hl-use-font-lock-keywords nil
- evil-emacs-state-cursor '("SeaGreen4" box)
- git-gutter-fr:side 'left-fringe
- evil-normal-state-cursor '("SeaGreen4" box)
- jit-lock-chunk-size 5000
- evil-visual-state-cursor '("cyan" box)
- evil-replace-state-cursor '("red" bar)
- evil-operator-state-cursor '("red" hollow)
- )
+(setq-default visual-fill-column-center-text t
+              valign-fancy-bar 't
+              fill-column 110)
 
 (spacemacs/toggle-vi-tilde-fringe-off)
 (spacemacs/set-leader-keys-for-major-mode 'elm-mode "fr" 'lsp-ui-peek-find-references)
@@ -27,7 +29,6 @@
 (spacemacs/set-leader-keys-for-major-mode 'haskell-mode "uh" 'lsp-ui-doc-hide)
 (spacemacs/set-leader-keys-for-major-mode 'haskell-mode "al" 'lsp-avy-lens)
 
-
 '(version-control :variables
                   version-control-diff-side 'left
                   version-control-global-margin t)
@@ -37,6 +38,23 @@
 (require 'dap-chrome)
 (require 'dap-firefox)
 
+(add-hook 'help-mode-hook 'visual-line-mode)
+(add-hook 'help-mode-hook 'visual-fill-column-mode)
+(add-hook 'yaml-mode-hook 'my-yaml-hook)
+(add-hook 'haskell-mode-hook 'pretty-lambdas-haskell)
+(add-hook 'elm-mode-hook 'pretty-lambdas-haskell)
+(add-hook 'go-mode-hook #'lsp-deferred)
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-tsx-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . typescript-tsx-mode))
+
+(advice-add 'ediff-quit :around #'disable-y-or-n-p)
+
+(defun my-yaml-hook ()
+  (spacemacs/toggle-absolute-line-numbers-on)
+  (highlight-indentation-mode 1))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -62,20 +80,10 @@
                                     ,(make-char 'greek-iso8859-7 107))
                     nil))))))
 
-(add-hook 'haskell-mode-hook 'pretty-lambdas-haskell)
-(add-hook 'elm-mode-hook 'pretty-lambdas-haskell)
-(add-hook 'go-mode-hook #'lsp-deferred)
-
 ;; magit
 (defun disable-y-or-n-p (orig-fun &rest args)
   (cl-letf (((symbol-function 'y-or-n-p) (lambda (prompt) t)))
     (apply orig-fun args)))
-
-(advice-add 'ediff-quit :around #'disable-y-or-n-p)
-
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-tsx-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . typescript-tsx-mode))
 
 ;; background settings
 (set-frame-parameter (selected-frame) 'alpha-background 75)
@@ -92,6 +100,9 @@
   (setq css-indent-offset n)
   (setq groovy-indent-offset n))
 (my-setup-indent 2)
+
+(spacemacs/set-leader-keys "gn" 'git-gutter:next-hunk)
+(spacemacs/set-leader-keys "gp" 'git-gutter:previous-hunk)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
