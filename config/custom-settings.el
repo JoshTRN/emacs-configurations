@@ -38,6 +38,7 @@
 (require 'dap-chrome)
 (require 'dap-firefox)
 
+(add-hook 'org-mode-hook 'my-org-hook)
 (add-hook 'help-mode-hook 'visual-line-mode)
 (add-hook 'help-mode-hook 'visual-fill-column-mode)
 (add-hook 'yaml-mode-hook 'my-yaml-hook)
@@ -100,6 +101,16 @@
   (setq css-indent-offset n)
   (setq groovy-indent-offset n))
 (my-setup-indent 2)
+
+
+(defun my-org-hook ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1)
+  (toggle-word-wrap 1)
+  (visual-line-mode 1)
+  (page-break-lines-mode 1)
+  )
 
 (spacemacs/set-leader-keys "gn" 'git-gutter:next-hunk)
 (spacemacs/set-leader-keys "gp" 'git-gutter:previous-hunk)
