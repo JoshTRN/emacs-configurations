@@ -193,6 +193,11 @@ If FRAME is nil, it defaults to the selected frame."
 (spacemacs/set-leader-keys "Tb"
   'spacemacs/scale-background-transparency-transient-state/spacemacs/toggle-background-transparency)
 
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
