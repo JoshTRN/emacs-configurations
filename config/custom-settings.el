@@ -13,6 +13,7 @@
       evil-operator-state-cursor '("red" hollow))
 
 (setq-default visual-fill-column-center-text t
+              visual-fill-column-width 110
               valign-fancy-bar 't
               fill-column 110)
 
@@ -38,7 +39,8 @@
 (require 'dap-chrome)
 (require 'dap-firefox)
 
-(add-hook 'org-mode-hook 'my-org-hook)
+(add-hook 'eww-mode-hook 'pretty-print)
+(add-hook 'org-mode-hook 'pretty-print)
 (add-hook 'help-mode-hook 'visual-line-mode)
 (add-hook 'help-mode-hook 'visual-fill-column-mode)
 (add-hook 'yaml-mode-hook 'my-yaml-hook)
@@ -74,6 +76,8 @@
             el)
           pretty-alist))
 
+(setq helm-swoop-speed-or-color t)
+
 (defun pretty-lambdas-haskell ()
   (font-lock-add-keywords
    nil `((,(concat "\\(" (regexp-quote "\\") "\\)")
@@ -102,18 +106,90 @@
   (setq groovy-indent-offset n))
 (my-setup-indent 2)
 
+(setq tab-width 2)
 
-(defun my-org-hook ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
+(defun pretty-print ()
   (visual-fill-column-mode 1)
-  (toggle-word-wrap 1)
   (visual-line-mode 1)
-  (page-break-lines-mode 1)
   )
 
 (spacemacs/set-leader-keys "gn" 'git-gutter:next-hunk)
 (spacemacs/set-leader-keys "gp" 'git-gutter:previous-hunk)
+
+(spacemacs/declare-prefix "m" "Markdown")
+(spacemacs/set-leader-keys "ml" 'lsp-ui-doc--open-markdown-link)
+
+;; core/core-dotspacemacs.el
+(spacemacs|defc dotspacemacs-background-transparency 90
+  "A value from the range (0..100), in increasing opacity, which describes the
+transparency level of a frame when it's active or selected. Transparency
+can be toggled through `toggle-transparency'."
+  'integer
+  'spacemacs-dotspacemacs-init)
+
+;; layers/+spacemacs/spacemacs-defaults/keybindings.el
+(defun spacemacs/enable-background-transparency (&optional frame alpha-background)
+  "Enable background transparency for FRAME.
+If FRAME is nil, it defaults to the selected frame.
+ALPHA is a pair of active and inactive transparency values. The
+default value for ALPHA is based on "
+  (interactive)
+  (message (number-to-string dotspacemacs-background-transparency))
+  (let ((alpha-setting (or alpha-background dotspacemacs-background-transparency)))
+    (message (number-to-string alpha-setting))
+    (set-frame-parameter frame 'alpha-background alpha-setting)))
+
+(defun spacemacs/disable-background-transparency (&optional frame)
+  "Disable transparency for FRAME.
+If FRAME is nil, it defaults to the selected frame."
+  (interactive)
+  (set-frame-parameter frame 'alpha-background 100))
+
+
+(defun spacemacs/toggle-background-transparency (&optional frame)
+  "Toggle between transparent and opaque state for FRAME.
+If FRAME is nil, it defaults to the selected frame."
+  (interactive)
+  (let ((alpha-background (frame-parameter frame 'alpha-background))
+        (dotfile-setting dotspacemacs-background-transparency))
+    (if (equal alpha-background dotfile-setting)
+        (spacemacs/disable-background-transparency frame)
+      (spacemacs/enable-background-transparency frame dotfile-setting))))
+
+(defun spacemacs/increase-background-transparency (&optional frame)
+  "Increase transparency for FRAME.
+If FRAME is nil, it defaults to the selected frame."
+  (interactive)
+  (let* ((current-alpha (or (frame-parameter frame 'alpha-background) 100))
+         (message current-alpha)
+         (increased-alpha (- current-alpha 5)))
+    (when (>= increased-alpha frame-alpha-lower-limit)
+      (set-frame-parameter frame 'alpha-background increased-alpha))))
+
+(defun spacemacs/decrease-background-transparency (&optional frame)
+  "Decrease transparency for FRAME.
+If FRAME is nil, it defaults to the selected frame."
+  (interactive)
+  (let* ((current-alpha (or (frame-parameter frame 'alpha-background) 100))
+         (decreased-alpha (+ current-alpha 5)))
+    (when (<= decreased-alpha 100)
+      (set-frame-parameter frame 'alpha-background decreased-alpha))))
+
+(spacemacs|define-transient-state scale-background-transparency
+  :title "Frame Background Transparency Transient State"
+  :doc "\n[_+_/_=_/_k_] increase transparency [_-_/___/_j_] decrease [_T_] toggle [_q_] quit"
+  :bindings
+  ("+" spacemacs/increase-background-transparency)
+  ("=" spacemacs/increase-background-transparency)
+  ("k" spacemacs/increase-background-transparency)
+  ("-" spacemacs/decrease-background-transparency)
+  ("_" spacemacs/decrease-background-transparency)
+  ("j" spacemacs/decrease-background-transparency)
+  ("T" spacemacs/toggle-background-transparency)
+  ("q" nil :exit t))
+
+(spacemacs/set-leader-keys "Tb"
+  'spacemacs/scale-background-transparency-transient-state/spacemacs/toggle-background-transparency)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -163,7 +239,7 @@
  '(org-fontify-done-headline nil)
  '(org-fontify-todo-headline nil)
  '(package-selected-packages
-   '(texfrag auctex company-emoji emoji-cheat-sheet-plus slack emojify circe oauth2 websocket company-nixos-options helm-nixos-options nix-mode nixos-options haskell-emacs flymake-hlint shfmt insert-shebang flycheck-bashate fish-mode company-shell godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc flycheck-golangci-lint company-go go-mode yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data rjsx-mode tide typescript-mode mmm-mode markdown-toc lsp-ui lsp-origami origami helm-lsp gh-md xterm-color vterm terminal-here shell-pop multi-term flyspell-correct-helm flyspell-correct eshell-z eshell-prompt-extras esh-help auto-dictionary yasnippet-snippets unfill mwim helm-company helm-c-yasnippet git-gutter-fringe+ fringe-helper git-gutter+ dash fuzzy flycheck-pos-tip pos-tip browse-at-remote auto-yasnippet ac-ispell auto-complete flycheck-elm elm-test-runner elm-mode reformatter lsp-haskell hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell dante lcr haskell-mode company-cabal cmm-mode attrap web-beautify tern prettier-js npm-mode nodejs-repl livid-mode skewer-mode js2-refactor yasnippet multiple-cursors js2-mode js-doc import-js grizzl impatient-mode simple-httpd helm-gtags ggtags dap-mode lsp-treemacs bui lsp-mode dash-functional counsel-gtags counsel swiper ivy company add-node-modules-path treemacs-magit smeargle orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain magit-svn magit-section magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-git-grep gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link forge markdown-mode magit ghub closql emacsql-sqlite emacsql treepy git-commit with-editor transient evil-org ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
+   '(hideshow-org multi-vterm language-detection tldr eaf texfrag auctex company-emoji emoji-cheat-sheet-plus slack emojify circe oauth2 websocket company-nixos-options helm-nixos-options nix-mode nixos-options haskell-emacs flymake-hlint shfmt insert-shebang flycheck-bashate fish-mode company-shell godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc flycheck-golangci-lint company-go go-mode yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data rjsx-mode tide typescript-mode mmm-mode markdown-toc lsp-ui lsp-origami origami helm-lsp gh-md xterm-color vterm terminal-here shell-pop multi-term flyspell-correct-helm flyspell-correct eshell-z eshell-prompt-extras esh-help auto-dictionary yasnippet-snippets unfill mwim helm-company helm-c-yasnippet git-gutter-fringe+ fringe-helper git-gutter+ dash fuzzy flycheck-pos-tip pos-tip browse-at-remote auto-yasnippet ac-ispell auto-complete flycheck-elm elm-test-runner elm-mode reformatter lsp-haskell hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell dante lcr haskell-mode company-cabal cmm-mode attrap web-beautify tern prettier-js npm-mode nodejs-repl livid-mode skewer-mode js2-refactor yasnippet multiple-cursors js2-mode js-doc import-js grizzl impatient-mode simple-httpd helm-gtags ggtags dap-mode lsp-treemacs bui lsp-mode dash-functional counsel-gtags counsel swiper ivy company add-node-modules-path treemacs-magit smeargle orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain magit-svn magit-section magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-git-grep gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link forge markdown-mode magit ghub closql emacsql-sqlite emacsql treepy git-commit with-editor transient evil-org ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (cons "#d6d6d4" "#1c1e1f"))
  '(pos-tip-background-color "#FFFACE")

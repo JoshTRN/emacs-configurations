@@ -4,6 +4,7 @@
                          dap
                          debug
                          docker
+                         eaf
                          elm
                          (elm :variables
                               elm-format-on-save t
@@ -14,8 +15,8 @@
                          emacs-lisp
                          eww
                          git
-                         go
-                         (go :variables go-backend 'lsp)
+                         (go :variables go-backend 'lsp
+                             go-tab-width 2)
                          tree-sitter
                          (tree-sitter :variables
                                       tree-sitter-syntax-highlight-enable t
@@ -47,7 +48,7 @@
                          (shell :variables
                                 shell-default-height 30
                                 shell-default-position 'bottom
-                                shell-default-shell 'multi-term)
+                                shell-default-shell 'multi-vterm)
                          slack
                          spell-checking
                          syntax-checking
