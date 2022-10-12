@@ -111,6 +111,8 @@
 (defun pretty-print ()
   (visual-fill-column-mode 1)
   (visual-line-mode 1)
+  (setq header-line-format " ")
+  (setq-local face-remapping-alist '((header-line (:height 4.0) variable-pitch)))
   )
 
 (spacemacs/set-leader-keys "gn" 'git-gutter:next-hunk)
