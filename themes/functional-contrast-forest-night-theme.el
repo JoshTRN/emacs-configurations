@@ -123,6 +123,7 @@
  '(smerge-refined-changed ((t nil)))
  '(smerge-refined-removed ((t (:inherit ediff-fine-diff-A))))
  '(smerge-upper ((t (:inherit ediff-current-diff-A))))
+ '(solaire-default-face ((t (:inherit default :background "#000e0a"))))
  '(sp-show-pair-match-face ((t (:inherit (show-paren-match)))))
  '(spaceline-evil-emacs ((t (:inherit 'mode-line :foreground "#3E3D31" :background "SkyBlue2"))))
  '(spaceline-evil-normal ((t (:background "purple4" :foreground "light grey"))))
@@ -160,6 +161,7 @@
  '(web-mode-html-attr-name-face ((t (:foreground "#00d364"))))
  '(web-mode-html-tag-face ((t (:foreground "deep sky blue"))))
  '(widget-field ((t (:extend t :background "#000e0a"))))
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#011f18" :foreground "#26A69A" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "CTDB" :family "Fira Code")))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#011f18" :foreground "#26A69A" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "CTDB" :family "Fira Code"))))
+ )
 
 (provide-theme 'functional-contrast-forest-night)

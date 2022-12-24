@@ -70,7 +70,7 @@
 ;; (type_alias_declaration name: (upper_case_identifier) @storage.type.elm)
 
 ;; (union_variant(upper_case_identifier) @union.elm)
-(value_expr (upper_case_qid (upper_case_identifier)) @union.elm)
+(value_expr (value_qid (upper_case_identifier) @type))
 
 ; comments
 (line_comment) @comment
@@ -89,3 +89,7 @@
 
 ; glsl
 ;; (glsl_content) @source.glsl
+
+(record_pattern (lower_pattern (lower_case_identifier) @constant))
+
+(anonymous_function_expr (pattern (lower_pattern (lower_case_identifier) @variable.parameter)))
