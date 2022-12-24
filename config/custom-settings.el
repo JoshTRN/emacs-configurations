@@ -124,6 +124,7 @@
 (add-hook 'eww-mode-hook 'pretty-print)
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 (add-hook 'kubernetes-overview-mode-hook 'kube-hook)
+(add-hook 'js-mode-hook '(lambda () (buffer-face-set :foreground "white")))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-tsx-mode))
