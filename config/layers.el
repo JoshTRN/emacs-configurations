@@ -1,4 +1,6 @@
 (setq custom-layers '(
+                      lua
+                      rust
                       csv
                       (auto-completion :variables
                                        auto-completion-enable-snippets-in-popup t)
@@ -32,7 +34,7 @@
                       javascript
                       (javascript :variables js2-mode-show-strict-warnings nil)
                       kubernetes
-                      lsp
+                      (lsp :variables lsp-lens-enable t)
                       markdown
                       multiple-cursors
                       nixos
@@ -62,7 +64,7 @@
                                   typescript-fmt-on-save t
                                   typescript-backend 'lsp
                                   typescript-tsx-mode t
-                                  typescript-linter 'tslint)
+                                  typescript-linter 'lsp)
                       terraform
                       themes-megapack
                       treemacs

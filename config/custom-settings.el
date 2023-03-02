@@ -6,8 +6,6 @@
       git-gutter-fr:side 'left-fringe
       helm-swoop-speed-or-color t
       jit-lock-chunk-size 5000
-      lsp-ui-doc-enable nil
-      lsp-ui-doc-position 'at-point
       org-confirm-babel-evaluate nil
       org-ellipsis " ⤵"
       org-roam-directory "~/org-roam"
@@ -159,14 +157,26 @@
 (spacemacs/declare-prefix "m" "Markdown")
 (spacemacs/set-leader-keys "ml" 'lsp-ui-doc--open-markdown-link)
 
+(define-derived-mode ts-mode typescript-mode "ts"
+  "Major mode for editing ts code blocks.")
+
+(defun org-babel-execute:typescript (body params)
+  (let ((org-babel-js-cmd "npx ts-node < "))
+    (org-babel-execute:js body params)))
+
+(defalias 'org-babel-execute:ts 'org-babel-execute:typescript)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((python . t)
-   (java   . t)
-   (latex  . t)
-   (ditaa  . t)
-   (shell  . t)
-   (js     . t)))
+ '(
+   (js         . t)
+   (java       . t)
+   (latex      . t)
+   (ditaa      . t)
+   (shell      . t)
+   (python     . t)
+   (haskell    . t)
+   ))
 
 (my-setup-indent 2)
 
