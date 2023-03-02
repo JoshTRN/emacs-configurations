@@ -54,6 +54,15 @@
   (evil-jump-backward count)
   (evil-scroll-line-to-center count))
 
+(defun evil-search-next-centered (&optional count)
+  (interactive)
+  (evil-ex-search-next)
+  (evil-scroll-line-to-center count))
+
+(defun evil-search-previous-centered (&optional count)
+  (interactive)
+  (evil-ex-search-previous)
+  (evil-scroll-line-to-center count))
 
 (defun evil-jump-forward-centered (&optional count)
   (interactive)
@@ -65,6 +74,7 @@
   (setq javascript-indent-level n)
   (setq typescript-indent-level n)
   (setq js-indent-level n)
+  (setq c-basic-offset n)
   (setq web-mode-markup-indent-offset n)
   (setq web-mode-css-indent-offset n)
   (setq web-mode-code-indent-offset n)
@@ -134,6 +144,8 @@
 (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-ex-search-next>") 'evil-search-next-centered )
+(define-key evil-motion-state-map (kbd "<remap> <evil-ex-search-previous>") 'evil-search-previous-centered)
 
 (define-key evil-motion-state-map (kbd "<remap> <evil-jump-backward>") 'evil-jump-backward-centered)
 (define-key evil-motion-state-map (kbd "<remap> <evil-jump-forward>") 'evil-jump-forward-centered)
@@ -168,15 +180,14 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '(
-   (js         . t)
-   (java       . t)
-   (latex      . t)
-   (ditaa      . t)
-   (shell      . t)
-   (python     . t)
-   (haskell    . t)
-   ))
+ '((python  . t)
+   (java    . t)
+   (http    . t)
+   (latex   . t)
+   (ditaa   . t)
+   (shell   . t)
+   (haskell . t)
+   (js      . t)))
 
 (my-setup-indent 2)
 
