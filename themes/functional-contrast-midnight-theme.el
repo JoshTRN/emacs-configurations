@@ -189,6 +189,7 @@
  '(org-level-10 ((t (:foreground "#00d364"))))
  '(org-todo ((t (:foreground "VioletRed2"))))
  '(org-done ((t (:foreground "#00d364"))))
+ '(org-headline-done ((t (:foreground "dark slate blue"))))
  '(org-meta-line ((t (:foreground "dark slate blue" :background "#060013" :extend t))))
  '(org-block-begin-line ((t (:foreground "dark slate blue" :background "#060013" :extend t))))
  '(org-block ((t (:foreground "white" :background "#060013" :extend t))))
