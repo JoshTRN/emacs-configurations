@@ -176,7 +176,7 @@
  '(whitespace-tab ((t (:foreground "grey11"))))
  '(whitespace-trailing ((t (:inherit magit-diff-removed :weight bold))))
  '(widget-field ((t (:extend t :background "black" :foreground "gray"))))
- '(line-number ((t (:background "#060013" :foreground "#868686"))))
+ '(line-number ((t (:background "#060013" :foreground "dark slate blue"))))
  '(org-level-1 ((t (:foreground "#AE81FF" :height 1.4 :weight bold ))))
  '(org-level-2 ((t (:foreground "#00FFBF" :height 1.2 :weight demibold))))
  '(org-level-3 ((t (:foreground "#CDD581" :height 1.1 :weight semibold))))
