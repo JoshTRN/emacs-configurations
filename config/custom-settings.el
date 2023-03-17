@@ -69,6 +69,16 @@
   (evil-jump-forward count)
   (evil-scroll-line-to-center count))
 
+(defun evil-scroll-down-centered (&optional count)
+  (interactive)
+  (evil-scroll-down count)
+  (evil-scroll-line-to-center count))
+
+(defun evil-scroll-up-centered (&optional count)
+  (interactive)
+  (evil-scroll-up count)
+  (evil-scroll-line-to-center count))
+
 
 (defun my-setup-indent (n)
   (setq javascript-indent-level n)
@@ -150,6 +160,8 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-jump-backward>") 'evil-jump-backward-centered)
 (define-key evil-motion-state-map (kbd "<remap> <evil-jump-forward>") 'evil-jump-forward-centered)
 
+(define-key evil-motion-state-map (kbd "<remap> <evil-scroll-down>") 'evil-scroll-down-centered)
+(define-key evil-motion-state-map (kbd "<remap> <evil-scroll-up>") 'evil-scroll-up-centered)
 
 (spacemacs/set-leader-keys-for-major-mode 'elm-mode "fr" 'lsp-ui-peek-find-references)
 (spacemacs/set-leader-keys-for-major-mode 'elm-mode "ug" 'lsp-ui-doc-glance)
@@ -187,6 +199,7 @@
    (ditaa   . t)
    (shell   . t)
    (haskell . t)
+   (sql     . t)
    (js      . t)))
 
 (my-setup-indent 2)

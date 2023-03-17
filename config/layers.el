@@ -39,6 +39,7 @@
                            org-enable-roam-ui t
                            org-enable-transclusion-support t
                            org-enable-valign t
+                           org-enable-org-journal-support t
                            org-enable-verb-support t)
                       pandoc
                       prettier
