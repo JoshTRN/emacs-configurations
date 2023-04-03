@@ -92,6 +92,7 @@
   (setq groovy-indent-offset n))
 
 (defun pretty-print ()
+  (interactive)
   (visual-fill-column-mode 1)
   (visual-line-mode 1))
 
