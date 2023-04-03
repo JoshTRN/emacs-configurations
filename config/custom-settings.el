@@ -33,7 +33,7 @@
   this way compose-region called by prettify-symbols-mode
   will use the correct width of the symbols
   instead of the width measured by char-width."
-  (mapcar (lambda (el)
+  (mapcar #'(lambda (el)
             (setcdr el (string ?\t (cdr el)))
             el)
           pretty-alist))
@@ -46,7 +46,7 @@
                     nil))))))
 
 (defun disable-y-or-n-p (orig-fun &rest args)
-  (cl-letf (((symbol-function 'y-or-n-p) (lambda (prompt) t)))
+  (cl-letf (((symbol-function 'y-or-n-p) #'(lambda (prompt) t)))
     (apply orig-fun args)))
 
 (defun evil-jump-backward-centered (&optional count)
@@ -138,18 +138,18 @@
 
 (remove-hook 'org-present-mode-hook 'spacemacs//org-present-start)
 
-(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
-(add-hook 'help-mode-hook 'pretty-print)
-(add-hook 'lsp-help-mode-hook 'pretty-print)
-(add-hook 'yaml-mode-hook 'my-yaml-hook)
+(add-hook 'markdown-mode-hook #'my-markdown-mode-hook)
+(add-hook 'help-mode-hook #'pretty-print)
+(add-hook 'lsp-help-mode-hook #'pretty-print)
+(add-hook 'yaml-mode-hook #'my-yaml-hook)
 (add-hook 'haskell-mode-hook 'pretty-lambdas-haskell)
-(add-hook 'elm-mode-hook 'pretty-lambdas-haskell)
+(add-hook 'elm-mode-hook #'pretty-lambdas-haskell)
 (add-hook 'go-mode-hook #'lsp-deferred)
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-(add-hook 'eww-mode-hook 'pretty-print)
-(add-hook 'org-mode-hook 'my-org-mode-hook)
+(add-hook 'eww-mode-hook #'pretty-print)
+(add-hook 'org-mode-hook #'my-org-mode-hook)
 (add-hook 'kubernetes-overview-mode-hook 'kube-hook)
-(add-hook 'js-mode-hook '(lambda () (buffer-face-set :foreground "white")))
+(add-hook 'js-mode-hook #'(lambda () (buffer-face-set :foreground "white")))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-tsx-mode))
@@ -228,7 +228,7 @@
 (eval-after-load "org-present"
   '(progn
      (add-hook 'org-present-mode-hook
-               (lambda ()
+               #'(lambda ()
                  (org-display-inline-images)
                  (evil-define-key 'normal org-present-mode-keymap
                    (kbd "<left>")  'org-present-prev
@@ -236,13 +236,13 @@
                    "q"             'org-present-quit)
                  (text-scale-set 2)
                  (setq visual-fill-column-width 50)
-                 (funcall(lambda ()
+                 (funcall #'(lambda ()
                            (message "setting org shift tab")
                            (org-shifttab)
                            ))
                  ))
      (add-hook 'org-present-mode-quit-hook
-               (lambda ()
+               #'(lambda ()
                  (org-remove-inline-images)
                  (text-scale-set 1)
                  (setq visual-fill-column-width 100)
