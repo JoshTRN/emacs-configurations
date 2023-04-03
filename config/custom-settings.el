@@ -114,6 +114,12 @@
   (org-indent-mode)
   (solaire-mode -1))
 
+(defun my-markdown-mode-hook ()
+  (pretty-print-header)
+  (setq global-hl-line-mode nil)
+  (markdown-toggle-markup-hiding 1)
+  (solaire-mode -1))
+
 (defun kube-hook ()
   (pretty-print-header)
   (solaire-mode -1))
@@ -131,7 +137,7 @@
 
 (remove-hook 'org-present-mode-hook 'spacemacs//org-present-start)
 
-(add-hook 'markdown-mode-hook 'pretty-print-header)
+(add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 (add-hook 'help-mode-hook 'pretty-print)
 (add-hook 'lsp-help-mode-hook 'pretty-print)
 (add-hook 'yaml-mode-hook 'my-yaml-hook)
