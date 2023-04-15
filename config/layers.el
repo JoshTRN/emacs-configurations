@@ -2,8 +2,7 @@
                       lua
                       rust
                       csv
-                      (auto-completion :variables
-                                       auto-completion-enable-snippets-in-popup t)
+                      (auto-completion :variables auto-completion-enable-snippets-in-popup t)
                       better-defaults
                       csv
                       dap
@@ -19,15 +18,14 @@
                       (go :variables
                           go-backend 'lsp
                           go-tab-width 2)
-                      html
                       haskell
-                      helm
+                      (helm :variables helm-position 'top)
+                      html
                       java
                       (javascript :variables js2-mode-show-strict-warnings nil)
                       kubernetes
                       (lsp :variables lsp-lens-enable t)
                       markdown
-                      (mu4e :variables mu4e-installation-path "/usr/share/emacs/site-lisp")
                       multiple-cursors
                       nixos
                       (node :variables node-add-modules-path t)
