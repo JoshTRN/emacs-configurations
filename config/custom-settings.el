@@ -211,6 +211,8 @@
 
 (my-setup-indent 2)
 
+(helm-ff-icon-mode)
+
 (spacemacs/toggle-vi-tilde-fringe-off)
 
 (solaire-global-mode +1)
