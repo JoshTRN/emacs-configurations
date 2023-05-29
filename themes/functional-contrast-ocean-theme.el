@@ -93,8 +93,6 @@
  '(magit-blame-highlight ((t (:extend t :background "#190d3b" :foreground "#9c91e4" :box (:line-width (1 . 1) :color "grey50" :style pressed-button)))))
  '(magit-diff-added ((t (:extend t :background "#111c11" :foreground "springgreen4"))))
  '(magit-diff-added-highlight ((t (:extend t :background "#335533" :foreground "SpringGreen3" :weight semi-bold))))
- '(magit-diff-context ((t (:extend t :background "#02295c" :foreground "slateblue4"))))
- '(magit-diff-context-highlight ((t (:extend t :background "#02295c" :foreground "SlateBlue2"))))
  '(magit-diff-hunk-heading ((t (:extend t :background "DodgerBlue4"  :foreground "grey80"))))
  '(magit-diff-hunk-heading-highlight ((t (:extend t :inherit region :foreground "white"))))
  '(magit-diff-removed ((t (:extend t :background "#3d0f0f" :foreground "firebrick4"))))
