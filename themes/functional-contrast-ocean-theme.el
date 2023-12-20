@@ -191,6 +191,8 @@
  '(org-level-10 ((t (:foreground "#00d364"))))
  '(org-todo ((t (:foreground "VioletRed2"))))
  '(org-done ((t (:foreground "#00d364"))))
+ '(org-src ((t (:inherit 'fixed-pitch))))
+ `(org-block ((t (:family "Monospace" :background ,solaire-bg))))
  '(org-headline-done ((t (:foreground "#0c486e"))))
  `(org-meta-line ((t (:foreground "#0c486e" :background ,solaire-bg :extend t))))
  '(org-document-info-keyword ((t (:foreground "#11669c" :extend t))))

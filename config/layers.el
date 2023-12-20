@@ -1,4 +1,6 @@
 (setq custom-layers '(
+                      nginx
+                      systemd
                       lua
                       rust
                       csv
@@ -8,7 +10,6 @@
                       dap
                       debug
                       docker
-                      eaf
                       (elm :variables
                            elm-format-on-save t
                            elm-sort-imports-on-save t)
@@ -38,6 +39,7 @@
                            org-enable-transclusion-support t
                            org-enable-valign t
                            org-enable-org-journal-support t
+                           org-enable-modern-support t
                            org-enable-verb-support t)
                       pandoc
                       prettier
@@ -45,7 +47,7 @@
                       shell-scripts
                       (shell :variables
                              shell-default-height 30
-                             shell-default-position 'bottom
+                             shell-default-position 'full
                              shell-default-shell 'multi-vterm)
                       slack
                       spell-checking
