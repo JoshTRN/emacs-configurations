@@ -88,14 +88,11 @@
   (highlight-indentation-mode 1))
 
 (defun my-org-mode-hook ()
-  (setq org-hide-leading-stars nil)
-  (setq org-indent-mode-turns-on-hiding-stars t)
   (pretty-print-header)
-  (org-superstar-mode)
-  (setq org-hide-emphasis-markers t)
+  (org-indent-mode t)
   (setq global-hl-line-mode nil)
-  (org-indent-mode)
-  (solaire-mode -1))
+  (solaire-mode 1)
+  )
 
 (defun my-markdown-mode-hook ()
   (pretty-print-header)
@@ -107,8 +104,6 @@
   (pretty-print-header)
   (solaire-mode -1))
 
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
@@ -146,6 +141,7 @@
       org-confirm-babel-evaluate nil
       org-ellipsis " ⤵"
       org-roam-directory "~/org-roam"
+      org-hide-emphasis-markers t
       org-src-tab-acts-natively  nil
       org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
       tab-width 2
