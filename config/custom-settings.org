@@ -150,6 +150,15 @@
       treemacs-width 50
       vterm-max-scrollback 100000
       vterm-timer-delay 0.01
+      helm-posframe-parameters '(
+                                   (poshandler . posframe-poshandler-frame-top-center)
+                                   (left-fringe . 10) (right-fringe . 10))
+      helm-posframe-width 100
+      mini-frame-show-parameters
+              '((top . 10)
+                (width . 0.5)
+                (left . 0.5)
+                (height . 30))
       )
 #+end_src
 
@@ -278,7 +287,6 @@
 (define-derived-mode ts-mode typescript-mode "ts"
   "Major mode for editing ts code blocks.")
 
-
 (my-setup-indent 2)
 (helm-ff-icon-mode)
 (spacemacs/toggle-vi-tilde-fringe-off)
@@ -286,4 +294,6 @@
 (pixel-scroll-precision-mode)
 (make-variable-buffer-local 'global-hl-line-mode)
 (advice-add 'ediff-quit :around #'disable-y-or-n-p)
+(display-time-mode t)
+(helm-posframe-enable)
 #+end_src
