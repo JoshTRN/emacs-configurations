@@ -205,7 +205,7 @@
  `(org-code ((t (:foreground "#CDD581" :background ,solaire-bg :extend t :inherit 'fixed-pitch))))
  '(org-superstar-item ((t (:foreground "lightgoldenrod1"))))
  `(org-table ((t (:extend t :foreground "gray85" :background ,solaire-bg))))
- `(default ((t (:inherit nil :extend nil :stipple nil :background ,bg-color :foreground "slategray1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 115 :width normal :foundry "CTDB" :family "Fira Code"))))
+ `(default ((t (:inherit nil :extend nil :stipple nil :background ,bg-color :foreground "slategray1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "CTDB" :family "Fira Code"))))
  )
 
 (provide-theme 'functional-contrast-ocean)

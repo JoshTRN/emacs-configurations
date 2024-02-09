@@ -209,7 +209,7 @@
  '(org-code ((t (:foreground "#CDD581" :background "#060013" :extend t :inherit 'fixed-pitch :family "Fira Code"))))
  '(org-superstar-item ((t (:foreground "lightgoldenrod1"))))
  '(org-table ((t (:extend t :foreground "gray85" :background "#060013"))))
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#0a001f" :foreground "slategray1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "CTDB" :family "Fira Code"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#0a001f" :foreground "slategray1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "CTDB" :family "Fira Code"))))
  )
 
 (provide-theme 'functional-contrast-midnight)
