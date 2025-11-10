@@ -1,6 +1,10 @@
 (deftheme functional-contrast-forest-night
   "Created 2022-07-04.")
 
+(setq bg-color  "#07273B"
+      keyword-color "#f0548b"
+      solaire-bg "#000e0a")
+
 (custom-theme-set-faces
  'functional-contrast-forest-night
  '(border ((t (:background "#011f18"))))
@@ -48,7 +52,7 @@
  '(haskell-constructor-face ((t (:inherit font-lock-type-face :foreground "purple2"))))
  '(haskell-operator-face ((t (:inherit font-lock-variable-name-face :foreground "#F92672"))))
  '(haskell-type-face ((t (:inherit font-lock-type-face))))
- '(header-line ((t (:box (:line-width 1 :color "#64645E" :style unspecified) :foreground "#F8F8F0" :inherit powerline-active1 :background "#001a14"))))
+ '(header-line ((t (:box (:line-width 1 :color "#64645E") :foreground "#F8F8F0" :inherit powerline-active1 :background "#001a14"))))
  '(helm-buffer-directory ((t (:inherit helm-ff-directory :extend t))))
  '(helm-buffer-file ((t (:inherit font-lock-builtin-face :extend t))))
  '(helm-ff-directory ((t (:extend t :foreground "deep sky blue"))))
@@ -103,7 +107,7 @@
  '(mode-line-buffer-id ((t (:weight bold :foreground "#00d364" :inherit bold))))
  '(mode-line-emphasis ((t (:weight bold :foreground "#FCFCFA" :background "red"))))
  '(mode-line-highlight ((t (:box (:line-width 2 :color "grey40" :style released-button) :foreground "#FF88FF" :inherit highlight))))
- '(mode-line-inactive ((t (:inherit powerline-active2 :foreground "#75715E" :box (:line-width 1 :color "#64645E" :style unspecified)))))
+ '(mode-line-inactive ((t (:inherit powerline-active2 :foreground "#75715E" :box (:line-width 1 :color "#64645E")))))
  '(next-error ((t (:inherit (region)))))
  '(outline-1 ((t (:inherit font-lock-function-name-face :height 1.5))))
  '(powerline-active0 ((t (:inherit region))))
@@ -123,7 +127,7 @@
  '(smerge-refined-changed ((t nil)))
  '(smerge-refined-removed ((t (:inherit ediff-fine-diff-A))))
  '(smerge-upper ((t (:inherit ediff-current-diff-A))))
- '(solaire-default-face ((t (:inherit default :background "#000e0a"))))
+ `(solaire-default-face ((t (:inherit default :background ,solaire-bg))))
  '(sp-show-pair-match-face ((t (:inherit (show-paren-match)))))
  '(spaceline-evil-emacs ((t (:inherit 'mode-line :foreground "#3E3D31" :background "SkyBlue2"))))
  '(spaceline-evil-normal ((t (:background "purple4" :foreground "light grey"))))
@@ -157,11 +161,31 @@
  '(tree-sitter-hl-face:variable.builtin ((t (:foreground "#f545b4"))))
  '(tree-sitter-hl-face:variable.parameter ((t (:foreground "#FF9735"))))
  '(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
+ '(org-level-1 ((t (:foreground "#AE81FF" :height 1.4 :weight bold :inherit 'variable-pitch))))
+ '(org-level-2 ((t (:foreground "#00FFBF" :height 1.2 :weight demibold))))
+ '(org-level-3 ((t (:foreground "#CDD581" :height 1.1 :weight semibold))))
+ '(org-level-4 ((t (:inherit outline-5))))
+ '(org-level-5 ((t (:foreground "#CDD581"))))
+ '(org-level-6 ((t (:foreground "#00d364"))))
+ '(org-level-7 ((t (:foreground "#AE81FF"))))
+ '(org-level-8 ((t (:inherit outline-5))))
+ '(org-level-9 ((t (:foreground "#CDD581"))))
+ '(org-level-10 ((t (:foreground "#00d364"))))
+
+ `(org-block ((t (:family "Monospace" :font "Fira Code" :background ,solaire-bg))))
+ `(org-verbatim ((t (:foreground "#CDD581" :background ,solaire-bg :extend t :inherit 'fixed-pitch))))
+ `(org-meta-line ((t (:foreground "#0c486e" :background ,solaire-bg :extend t))))
+ '(org-document-info-keyword ((t (:foreground "#11669c" :extend t))))
+ '(org-document-info ((t (:inherit org-level-2))))
+ '(org-drawer ((t (:foreground "#11669c" :extend t))))
+ `(org-block-begin-line ((t (:foreground "#0c486e" :background ,solaire-bg :extend t))))
+ `(org-block ((t (:foreground "white" :background ,solaire-bg :extend t))))
+ `(org-code ((t (:foreground "#CDD581" :background ,solaire-bg :extend t :inherit 'fixed-pitch))))
  '(vertical-border ((((type tty)) (:inherit (mode-line-inactive)))))
  '(web-mode-html-attr-name-face ((t (:foreground "#00d364"))))
  '(web-mode-html-tag-face ((t (:foreground "deep sky blue"))))
  '(widget-field ((t (:extend t :background "#000e0a"))))
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#011f18" :foreground "#A0E7E0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "CTDB" :family "Fira Code"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#011f18" :foreground "slategray1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "CTDB" :family "Fira Code"))))
  )
 
 (provide-theme 'functional-contrast-forest-night)

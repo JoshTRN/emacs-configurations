@@ -5,119 +5,116 @@
 
 #+begin_src elisp
 
-(defun org-babel-tangle-block()
-  (interactive)
-  (let ((current-prefix-arg '(4)))
-    (call-interactively 'org-babel-tangle)))
+  (defun org-babel-tangle-block()
+    (interactive)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively 'org-babel-tangle)))
 
-(defun my-correct-symbol-bounds (pretty-alist)
-  "Prepend a TAB character to each symbol in this alist,
-  this way compose-region called by prettify-symbols-mode
-  will use the correct width of the symbols
-  instead of the width measured by char-width."
-  (mapcar #'(lambda (el)
-            (setcdr el (string ?\t (cdr el)))
-            el)
-          pretty-alist))
+  (defun my-correct-symbol-bounds (pretty-alist)
+    "Prepend a TAB character to each symbol in this alist,
+    this way compose-region called by prettify-symbols-mode
+    will use the correct width of the symbols
+    instead of the width measured by char-width." ;
+    (mapcar #'(lambda (el)
+              (setcdr el (string ?\t (cdr el)))
+              el)
+            pretty-alist))
 
-(defun pretty-lambdas-haskell ()
-  (font-lock-add-keywords
-   nil `((,(concat "\\(" (regexp-quote "\\") "\\)")
-          (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                    ,(make-char 'greek-iso8859-7 107))
-                    nil))))))
+  (defun pretty-lambdas-haskell ()
+    (font-lock-add-keywords
+     nil `((,(concat "\\(" (regexp-quote "\\") "\\)")
+            (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                      ,(make-char 'greek-iso8859-7 107))
+                      nil))))))
 
-(defun disable-y-or-n-p (orig-fun &rest args)
-  (cl-letf (((symbol-function 'y-or-n-p) #'(lambda (prompt) t)))
-    (apply orig-fun args)))
+  (defun disable-y-or-n-p (orig-fun &rest args)
+    (cl-letf (((symbol-function 'y-or-n-p) #'(lambda (prompt) t)))
+      (apply orig-fun args)))
 
-(defun evil-jump-backward-centered (&optional count)
-  (interactive)
-  (evil-jump-backward count)
-  (evil-scroll-line-to-center count))
+  (defun evil-jump-backward-centered (&optional count)
+    (interactive)
+    (evil-jump-backward count)
+    (evil-scroll-line-to-center count))
 
-(defun evil-search-next-centered (&optional count)
-  (interactive)
-  (evil-ex-search-next)
-  (evil-scroll-line-to-center count))
+  (defun evil-search-next-centered (&optional count)
+    (interactive)
+    (evil-ex-search-next)
+    (evil-scroll-line-to-center count))
 
-(defun evil-search-previous-centered (&optional count)
-  (interactive)
-  (evil-ex-search-previous)
-  (evil-scroll-line-to-center count))
+  (defun evil-search-previous-centered (&optional count)
+    (interactive)
+    (evil-ex-search-previous)
+    (evil-scroll-line-to-center count))
 
-(defun evil-jump-forward-centered (&optional count)
-  (interactive)
-  (evil-jump-forward count)
-  (evil-scroll-line-to-center count))
+  (defun evil-jump-forward-centered (&optional count)
+    (interactive)
+    (evil-jump-forward count)
+    (evil-scroll-line-to-center count))
 
-(defun evil-scroll-down-centered (&optional count)
-  (interactive)
-  (evil-scroll-down count)
-  (evil-scroll-line-to-center count))
+  (defun evil-scroll-down-centered (&optional count)
+    (interactive)
+    (evil-scroll-down count)
+    (evil-scroll-line-to-center count))
 
-(defun evil-scroll-up-centered (&optional count)
-  (interactive)
-  (evil-scroll-up count)
-  (evil-scroll-line-to-center count))
+  (defun evil-scroll-up-centered (&optional count)
+    (interactive)
+    (evil-scroll-up count)
+    (evil-scroll-line-to-center count))
 
 
-(defun my-setup-indent (n)
-  (setq javascript-indent-level n)
-  (setq typescript-indent-level n)
-  (setq js-indent-level n)
-  (setq c-basic-offset n)
-  (setq web-mode-markup-indent-offset n)
-  (setq web-mode-css-indent-offset n)
-  (setq web-mode-code-indent-offset n)
-  (setq css-indent-offset n)
-  (setq groovy-indent-offset n))
+  (defun my-setup-indent (n)
+    (setq javascript-indent-level n)
+    (setq typescript-indent-level n)
+    (setq js-indent-level n)
+    (setq c-basic-offset n)
+    (setq web-mode-markup-indent-offset n)
+    (setq web-mode-css-indent-offset n)
+    (setq web-mode-code-indent-offset n)
+    (setq css-indent-offset n)
+    (setq groovy-indent-offset n))
 
-(defun pretty-print ()
-  (interactive)
-  (hl-line-mode -1)
-  (visual-fill-column-mode 1)
-  (message "Pretty Printing Buffer")
-  (visual-line-mode 1))
+  (defun pretty-print ()
+    (interactive)
+    (hl-line-mode -1)
+    (visual-fill-column-mode 1)
+    (message "Pretty Printing Buffer")
+    (visual-line-mode 1))
 
-(defun pretty-print-header ()
-  (pretty-print)
-  (setq-local face-remapping-alist '((header-line (:height 4.0) variable-pitch)))
-  (setq header-line-format " "))
+  (defun pretty-print-header ()
+    (pretty-print)
+    (setq-local face-remapping-alist '((header-line (:height 4.0) variable-pitch)))
+    (setq header-line-format " "))
 
-(defun my-yaml-hook ()
-  (spacemacs/toggle-absolute-line-numbers-on)
-  (highlight-indentation-mode 1))
+  (defun my-yaml-hook ()
+    (spacemacs/toggle-absolute-line-numbers-on)
+    (highlight-indentation-mode 1))
 
-(defun my-org-mode-hook ()
-  (pretty-print-header)
-  (org-indent-mode t)
-  (setq global-hl-line-mode nil)
-  (solaire-mode -1)
-  )
+  (defun my-org-mode-hook ()
+    (pretty-print-header)
+    (org-indent-mode t)
+    (setq global-hl-line-mode nil)
+    (solaire-mode -1)
+    )
 
-(defun my-markdown-mode-hook ()
-  (pretty-print-header)
-  (setq global-hl-line-mode nil)
-  (markdown-toggle-markup-hiding 1)
-  (solaire-mode -1))
+  (defun my-markdown-mode-hook ()
+    (pretty-print-header)
+    (setq global-hl-line-mode nil)
+    (markdown-toggle-markup-hiding 1)
+    (solaire-mode -1))
 
-(defun kube-hook ()
-  (pretty-print-header)
-  (solaire-mode -1))
+  (defun kube-hook ()
+    (pretty-print-header)
+    (solaire-mode -1))
 
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
-(defun org-babel-execute:typescript (body params)
-  (let ((org-babel-js-cmd "npx ts-node < "))
-    (org-babel-execute:js body params)))
+  (defun org-babel-execute:typescript (body params)
+    (let ((org-babel-js-cmd "npx ts-node < "))
+      (org-babel-execute:js body params)))
 
 #+end_src
-
-#+RESULTS:
-: org-babel-execute:typescript
 
 * Variables
 ** Defaults
@@ -126,7 +123,7 @@
 (setq-default fill-column 110
               highlight-indent-guides-character 9615
               visual-fill-column-center-text t
-              visual-fill-column-width 110
+              visual-fill-column-width 130
               valign-fancy-bar 't)
 
 #+end_src
@@ -230,9 +227,6 @@
 (add-to-list 'custom-theme-load-path "~/code/emacs-configurations/themes")
 #+end_src
 
-#+RESULTS:
-| /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/zonokai-emacs-20160321.222542/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/zenburn-theme-20231120.2002/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/zen-and-art-theme-20120622.1437/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/white-sand-theme-20210131.813/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/underwater-theme-20131118.2/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/ujelly-theme-20180214.1624/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/twilight-theme-20120412.1303/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/twilight-bright-theme-20130605.843/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/twilight-anti-bright-theme-20160622.848/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/toxi-theme-20160424.2126/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/tao-theme-20231117.1840/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/tangotango-theme-20220714.2034/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/tango-plus-theme-20221011.1012/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/tango-2-theme-20120312.2025/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/sunny-day-theme-20140413.2125/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/sublime-themes-20170606.1844/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/subatomic256-theme-20130621.210/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/subatomic-theme-20220128.1615/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/spacegray-theme-20150719.1931/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/soothe-theme-20220922.349/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/solarized-theme-20231204.713/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/soft-stone-theme-20140614.835/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/soft-morning-theme-20150918.2041/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/soft-charcoal-theme-20140420.1643/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/smyx-theme-20141127.828/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/seti-theme-20190201.1848/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/reverse-theme-20141205.145/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/rebecca-theme-20180324.821/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/railscasts-theme-20150219.1525/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/purple-haze-theme-20141015.229/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/professional-theme-20150315.1100/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/planet-theme-20161031.217/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/phoenix-dark-pink-theme-20190821.48/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/phoenix-dark-mono-theme-20170729.1406/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/organic-green-theme-20231225.149/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/omtose-phellack-theme-20161111.2120/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/oldlace-theme-20150705.1300/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/occidental-theme-20130312.1958/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/obsidian-theme-20170719.948/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/noctilux-theme-20161113.1442/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/naquadah-theme-20190225.1427/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/mustang-theme-20170719.946/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/monokai-theme-20220117.1244/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/monochrome-theme-20140326.1050/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/molokai-theme-20220106.1520/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/moe-theme-20231006.639/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/modus-themes-20240104.1122/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/minimal-theme-20190113.2132/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/material-theme-20210904.1226/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/majapahit-themes-20221207.121/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/madhat2r-theme-20170203.30/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/lush-theme-20180816.2200/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/light-soap-theme-20150607.1445/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/kaolin-themes-20231004.243/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/jbeans-theme-20200924.1946/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/jazz-theme-20230814.1916/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/ir-black-theme-20130303.755/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/inkpot-theme-20230618.715/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/heroku-theme-20150523.219/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/hemisu-theme-20130508.1844/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/hc-zenburn-theme-20150928.1633/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/gruvbox-theme-20230921.120/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/gruber-darker-theme-20231026.2031/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/grandshell-theme-20180606.517/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/gotham-theme-20220107.1730/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/gandalf-theme-20130809.947/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/flatui-theme-20160619.127/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/flatland-theme-20171113.1521/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/farmhouse-themes-20221025.2054/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/eziam-themes-20230820.917/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/exotica-theme-20180212.2329/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/espresso-theme-20210505.1957/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/dracula-theme-20231013.821/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/doom-themes-20231208.2011/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/django-theme-20131022.902/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/darktooth-theme-20231011.427/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/darkokai-theme-20200614.1452/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/darkmine-theme-20160406.624/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/dakrone-theme-20170801.1933/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/cyberpunk-theme-20240112.1944/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/color-theme-sanityinc-tomorrow-20231226.930/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/color-theme-sanityinc-solarized-20220917.1350/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/clues-theme-20161213.1127/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/chocolate-theme-20210128.1647/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/cherry-blossom-theme-20150622.342/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/busybee-theme-20170719.928/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/bubbleberry-theme-20141017.944/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/birds-of-paradise-plus-theme-20130419.2129/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/badwolf-theme-20161004.715/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/apropospriate-theme-20230925.114/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/anti-zenburn-theme-20180712.1838/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/ample-zen-theme-20150119.2154/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/ample-theme-20180207.1745/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/alect-themes-20211022.1651/ | /Users/Joshua.T.Wood/.emacs.d/elpa/29.0/develop/afternoon-theme-20140104.1859/ | /Users/Joshua.T.Wood/.emacs.d/core/libs/spacemacs-theme/ | ~/code/emacs-configurations/themes | /Users/Joshua.T.Wood/.emacs.d/core/../core/libs/spacemacs-theme/ | custom-theme-directory | t |
-
 * Org Settings
 
 #+begin_src elisp
@@ -278,9 +272,6 @@
 (defalias 'org-babel-execute:ts 'org-babel-execute:typescript)
 #+end_src
 
-#+RESULTS:
-: org-babel-execute:ts
-
 * Requires
 
 #+begin_src elisp
@@ -288,9 +279,6 @@
 (require 'dap-chrome)
 (require 'dap-firefox)
 #+end_src
-
-#+RESULTS:
-: dap-firefox
 
 * Hooks
 
@@ -312,9 +300,6 @@
 (add-hook 'org-modern-mode-hook #'(lambda () (variable-pitch-mode t)))
 #+end_src
 
-#+RESULTS:
-| org-modern-mode-set-explicitly | (lambda nil (variable-pitch-mode t)) |
-
 * Miscellaneous Settings
 #+begin_src elisp
 (define-derived-mode ts-mode typescript-mode "ts"
@@ -330,6 +315,3 @@
 (display-time-mode t)
 (helm-posframe-enable)
 #+end_src
-
-#+RESULTS:
-: helm-posframe is enabled.
